@@ -1,0 +1,103 @@
+{
+    "info": {
+        "name": "GoFr Account Service",
+        "description": "API endpoints for the GoFr Account Service",
+        "version": "1.0.0"
+    },
+    "item": [
+        {
+            "name": "Health Check",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}/health",
+                    "host": ["{{base_url}}"],
+                    "path": ["health"]
+                }
+            }
+        },
+        {
+            "name": "Register User",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"username\": \"johndoe\",\n    \"email\": \"john@example.com\",\n    \"password\": \"securepassword123\"\n}"
+                },
+                "url": {
+                    "raw": "{{base_url}}/register",
+                    "host": ["{{base_url}}"],
+                    "path": ["register"]
+                }
+            }
+        },
+        {
+            "name": "Get User by Username",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}/user?username=johndoe",
+                    "host": ["{{base_url}}"],
+                    "path": ["user"],
+                    "query": [
+                        {
+                            "key": "username",
+                            "value": "johndoe"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Get User by Email",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}/user?email=john@example.com",
+                    "host": ["{{base_url}}"],
+                    "path": ["user"],
+                    "query": [
+                        {
+                            "key": "email",
+                            "value": "john@example.com"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Get User by ID",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}/user?id=1",
+                    "host": ["{{base_url}}"],
+                    "path": ["user"],
+                    "query": [
+                        {
+                            "key": "id",
+                            "value": "1"
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost:8080",
+            "type": "string"
+        }
+    ]
+}
