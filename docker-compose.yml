@@ -1,15 +1,40 @@
-version: '3.8'
+# version: '3.9'
+
 services:
-  postgres:
+  db:
     image: postgres:14
-    restart: always
+    container_name: accounts_db
     environment:
-      POSTGRES_USER: gofr
-      POSTGRES_PASSWORD: gofrpass
-      POSTGRES_DB: gofrdb
+      POSTGRES_USER: gouser
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: accounts
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
+      - ./internal/db/migrations:/docker-entrypoint-initdb.d/
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gouser -d accounts"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  app:
+    build: .
+    container_name: accounts_app
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_USER: gouser
+      DB_PASSWORD: pass
+      DB_NAME: accounts
+      DB_PORT: 5432
+      APP_PORT: 8080
+    restart: unless-stopped
+
 volumes:
-  pgdata:
+  db_data:
