@@ -8,8 +8,6 @@ A RESTful user account management service built with GoFr framework and PostgreS
 
 ```bash
 # Clone and navigate to the project
-git clone <your-repo-url>
-cd gofr-account-service
 
 # Start the application with database
 docker-compose up --build
@@ -43,16 +41,16 @@ curl http://localhost:8080/health
 ```bash
 curl -X POST http://localhost:8080/register \
   -H "Content-Type: application/json" \
-  -d '{"username":"johndoe","email":"john@example.com","password":"securepass123"}'
+  -d '{"username":"gautam","email":"gautam@email.com","password":"pass"}'
 ```
 
 ### Get User
 ```bash
 # By username
-curl "http://localhost:8080/user?username=johndoe"
+curl "http://localhost:8080/user?username=gautam"
 
 # By email
-curl "http://localhost:8080/user?email=john@example.com"
+curl "http://localhost:8080/user?email=gautam@email.com"
 
 # By ID
 curl "http://localhost:8080/user?id=1"
